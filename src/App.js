@@ -57,6 +57,8 @@ export default function WeatherSearch() {
   if (loaded) {
     return (
       <div class="App">
+
+        
         {form}
         <ul>
           <li>Temperature: {Math.round(weather.temperature)}°C</li>
