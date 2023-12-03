@@ -3,6 +3,7 @@ import axios from "axios";
 import "./App.css";
 import CurrentTime from "./CurrentTime";
 import WeatherApp from "./WeatherApp";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from "recharts";
 
 /**
  * WeatherSearch component that displays weather information for a given city.
@@ -19,6 +20,16 @@ export default function WeatherSearch() {
   const [weather, setWeather] = useState({});
   /*eslint-disable no-unused-vars*/
   const [error, setError] = useState(null);
+  /*eslint-disable no-unused-vars*/
+  const [unit, setUnit] = useState("celsius");
+  /*eslint-disable no-unused-vars*/
+  const toggleUnit = () => {
+    setUnit(unit === "celsius" ? "fahrenheit" : "celsius");
+  };
+  let temperature = Math.round(weather.temperature);
+  if (unit === "fahrenheit") {
+    temperature = Math.round((temperature * 9) / 5 + 32);
+  }
 
   function fetchWeather(city) {
     let apiKey = process.env.REACT_APP_API_KEY;
@@ -85,8 +96,9 @@ export default function WeatherSearch() {
           </span>
         </div>
         <ul className="Results">
-          <li>Temperature: {Math.round(weather.temperature)}°C</li>
-          <li>Description: {weather.description}</li>
+          <li onClick={toggleUnit}>
+            Temperature: {temperature}°{unit === "celsius" ? "C" : "F"}
+          </li>
           <li>Humidity: {weather.humidity}%</li>
           <li>Wind: {weather.wind}km/h</li>
           <li>

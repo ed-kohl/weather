@@ -3,8 +3,16 @@ import axios from "axios";
 
 function WeatherApp() {
   const [weather, setWeather] = useState(null);
+  const [unit, setUnit] = useState("celsius");
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const toggleUnit = () => {
+    setUnit(unit === "celsius" ? "fahrenheit" : "celsius");
+  };
 
   useEffect(() => {
+    setIsLoading(true);
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
@@ -16,26 +24,69 @@ function WeatherApp() {
           .get(url)
           .then((response) => {
             setWeather(response.data);
+            setIsLoading(false);
           })
           .catch((error) => {
             console.error("Error: ", error);
+            setError("Failed to fetch weather data");
+            setIsLoading(false);
           });
       },
       (error) => {
         console.error("Error: ", error);
+        setError("Failed to fetch location");
+        setIsLoading(false);
       }
     );
   }, []);
 
-  if (!weather) return <div>Loading...</div>;
+  if (isLoading) {
+    return <div>Loading...</div>; // Replace this with your loading spinner
+  }
 
+  if (error) {
+    return <div>{error}</div>; // Replace this with your error message
+  }
+
+  let temperature = Math.round(weather.main.temp);
+  if (unit === "fahrenheit") {
+    temperature = Math.round((temperature * 9) / 5 + 32);
+  }
+  const data = [
+    {
+      name: "Weather Data",
+      Temperature: temperature,
+      Humidity: weather.main.humidity,
+      Wind: weather.wind.speed,
+    },
+  ];
   return (
     <div className="SearchInProgress">
-      <h2>Weather in {weather.name}</h2>
-      <p>{weather.main.temp}°C</p>
-      <p>{weather.weather[0].description}</p>
-      <p>Humidity: {weather.main.humidity}%</p>
-      <p>Wind: {weather.wind.speed} m/s</p>
+      <div>
+        <div>
+          <span>
+            <h2>{weather.name}:</h2>
+          </span>
+
+          <ul>
+            <li onClick={toggleUnit}>
+              {temperature}°{unit === "celsius" ? "C" : "F"}
+            </li>
+            <li>
+              {weather.weather[0].description}{" "}
+              <img
+                src={weather.weather[0].icon}
+                alt={weather.weather[0].description}
+              ></img>
+            </li>
+            <li>Humidity: {weather.main.humidity}%</li>
+            <li>Wind: {weather.wind.speed} m/s</li>
+            <li>
+              Your current time:<br></br> {new Date().toLocaleTimeString()}
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }
