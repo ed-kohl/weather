@@ -1,0 +1,14 @@
+/* CurrentTime.css */
+.Time {
+    font-size: 20px;
+    color: seagreen;
+    font-weight: bold;
+    max-width:200px;
+    
+    margin-left:50px;
+    border:1px dotted grey;
+    border-radius:10px;
+    padding:10px;
+    background-color:lavender;}
+
+/* Add more styles as needed */

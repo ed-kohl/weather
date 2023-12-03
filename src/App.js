@@ -1,17 +1,31 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
-
+import CurrentTime from "./CurrentTime";
 /**
  * WeatherSearch component that displays weather information for a given city.
  * @returns {JSX.Element} The JSX element representing the WeatherSearch component.
  */
 export default function WeatherSearch() {
-  /* Notes for  myself for later: define use states*/
-
   const [city, setCity] = useState("");
   const [loaded, setLoaded] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [weather, setWeather] = useState({});
+  const [error, setError] = useState(null);
+
+  function fetchWeather(city) {
+    let apiKey = process.env.REACT_APP_API_KEY;
+    setLoading(true);
+    axios
+      .get(
+        `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=YOUR_API_KEY`
+      )
+      .then(displayWeather)
+      .catch((error) => {
+        setLoading(false);
+        setError(error.message);
+      });
+  }
 
   /*use axios and the openweather api  to call weather data*/
 
@@ -24,7 +38,7 @@ export default function WeatherSearch() {
       wind: response.data.wind.speed,
       humidity: response.data.main.humidity,
       icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
-      description: response.data.weather[0].description
+      description: response.data.weather[0].description,
     });
   }
 
@@ -56,11 +70,14 @@ export default function WeatherSearch() {
    */
   if (loaded) {
     return (
-      <div class="App">
-
-        
-        {form}
-        <ul>
+      <div className="App">
+        <div className="SearchInProgress">
+          <span>{form}</span>
+          <span>
+            <CurrentTime city={city} />
+          </span>
+        </div>
+        <ul className="Results">
           <li>Temperature: {Math.round(weather.temperature)}°C</li>
           <li>Description: {weather.description}</li>
           <li>Humidity: {weather.humidity}%</li>
