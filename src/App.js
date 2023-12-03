@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
@@ -9,6 +8,7 @@ import CurrentTime from "./CurrentTime";
  * @returns {JSX.Element} The JSX element representing the WeatherSearch component.
  */
 export default function WeatherSearch() {
+  /*eslint-disable no-unused-vars*/
   const [city, setCity] = useState("");
   const [loaded, setLoaded] = useState(false);
   const [loading, setLoading] = useState(false);
