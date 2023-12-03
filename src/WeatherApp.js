@@ -73,7 +73,6 @@ function WeatherApp() {
               {temperature}°{unit === "celsius" ? "C" : "F"}
             </li>
             <li>
-              {weather.weather[0].description}{" "}
               <img
                 src={weather.weather[0].icon}
                 alt={weather.weather[0].description}
