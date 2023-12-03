@@ -10,9 +10,13 @@ import CurrentTime from "./CurrentTime";
 export default function WeatherSearch() {
   /*eslint-disable no-unused-vars*/
   const [city, setCity] = useState("");
+  /*eslint-disable no-unused-vars*/
   const [loaded, setLoaded] = useState(false);
+  /*eslint-disable no-unused-vars*/
   const [loading, setLoading] = useState(false);
+  /*eslint-disable no-unused-vars*/
   const [weather, setWeather] = useState({});
+  /*eslint-disable no-unused-vars*/
   const [error, setError] = useState(null);
 
   function fetchWeather(city) {
