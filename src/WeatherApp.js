@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+/**
+ * WeatherApp component displays weather information based on user's location.
+ * @returns {JSX.Element} The WeatherApp component.
+ */
+/**
+ * WeatherApp component displays weather information based on user's location.
+ * @returns {JSX.Element} The WeatherApp component.
+ */
 function WeatherApp() {
   const [weather, setWeather] = useState(null);
   const [unit, setUnit] = useState("celsius");
@@ -40,6 +48,18 @@ function WeatherApp() {
     );
   }, []);
 
+  let temperature;
+  if (weather) {
+    let temperatureCelsius = Math.round(weather.main.temp);
+    let temperatureFahrenheit = Math.round((temperatureCelsius * 9) / 5 + 32);
+
+    if (unit === "celsius") {
+      temperature = temperatureCelsius;
+    } else {
+      temperature = temperatureFahrenheit;
+    }
+  }
+
   if (isLoading) {
     return <div>Loading...</div>; // Replace this with your loading spinner
   }
@@ -48,13 +68,8 @@ function WeatherApp() {
     return <div>{error}</div>; // Replace this with your error message
   }
 
-  let temperature = Math.round(weather.main.temp);
-  if (unit === "fahrenheit") {
-    temperature = Math.round((temperature * 9) / 5 + 32);
-  }
-
   return (
-    <div className="SearchInProgress">
+    <div className={`SearchInProgress`}>
       <div>
         <div>
           <span>
