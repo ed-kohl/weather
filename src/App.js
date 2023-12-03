@@ -89,28 +89,32 @@ export default function WeatherSearch() {
     return (
       <div className="App">
         <div className="SearchInProgress">
-          <span>{form}</span>
-          <span>
+          <div className="form">{form}</div>
+          <div className="time">
             <CurrentTime city={city} />
-          </span>
+          </div>
         </div>
-        <ul className="Results">
-          <li onClick={toggleUnit}>
-            Temperature: {temperature}°{unit === "celsius" ? "C" : "F"}
-          </li>
-          <li>Humidity: {weather.humidity}%</li>
-          <li>Wind: {weather.wind}km/h</li>
-          <li>
-            <img src={weather.icon} alt={weather.description} />
-          </li>
-        </ul>
+        <div className="Results">
+          <ul>
+            <li onClick={toggleUnit}>
+              Temperature: {temperature}°{unit === "celsius" ? "C" : "F"}
+            </li>
+            <li>Humidity: {weather.humidity}%</li>
+            <li>Wind: {weather.wind}km/h</li>
+            <li>
+              <img src={weather.icon} alt={weather.description} />
+            </li>
+          </ul>
+        </div>
       </div>
     );
   } else {
     return (
-      <div>
-        {form}
-        <WeatherApp />
+      <div className="Container">
+        <div>{form}</div>
+        <div>
+          <WeatherApp />
+        </div>
       </div>
     );
   }

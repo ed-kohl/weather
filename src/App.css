@@ -1,19 +1,56 @@
 .App {
   font-family: sans-serif;
   text-align: center;
-  display: block;
+  display: flex;
   margin: 0 auto;
+  flex-direction: column;
 
 }
 
+.Container{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  margin: 0 auto;
+  margin-top:20px;
+
+  border-radius: 20px;
+  max-width: 768px;
+  background-color: white;
+  min-height: 200px;
+
+}
 .SearchInProgress{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  width:100%;
+  color: seagreen;
+  text-align: center;
+  display:flex;
+ 
+ align-items:center;
+
+  
+  margin-top:40px;
+}
+.form{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto;
+  margin-top:20px;
+}
+.time{
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
   font-weight: bold;
   color: seagreen;
   text-align: center;
   display:flex;
-  justify-content:center;
+ 
   align-items:center; 
   margin-top:20px;
 }
@@ -36,4 +73,16 @@ li {
   justify-content:center;
   align-items:center; 
   margin-top:20px;
+}
+
+@media screen and (max-width: 768px) {
+  /* Add your styles for smaller screens here */
+}
+
+body {
+  background-image: url('/src/images/water-3354063_1280.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
 }

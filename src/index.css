@@ -71,34 +71,19 @@ footer a{
   text-decoration:none;
 }
 
-.cold-celsius {
-  background-image: url('/src/images/ice-cubes-3506781_1280.jpg');
-}
+footer a:hover{
+  color:seagreen;
+  text-decoration:underline;}
 
-.cool-celsius {
-  background-image: url('/src/images/wyoming-4786394_1280.jpg');
-}
 
-.warm-celsius {
-  background-image: url('/src/images/water-3354063_1280.jpg');
-}
-
-.hot-celsius {
-  background-image: url('/src/images/thermometer-4294021_1280.jpg');
-}
-
-.cold-fahrenheit {
-  background-image: url('/src/images/ice-cubes-3506781_1280.jpg');
-}
-
-.cool-fahrenheit {
-  background-image: url('/src/images/wyoming-4786394_1280.jpg');
-}
-
-.warm-fahrenheit {
-  background-image: url('/src/images/water-3354063_1280.jpg');
-}
-
-.hotfahrenheit {
-  background-image: url('/src/images/thermometer-4294021_1280.jpg');
-}
+    @media screen and (max-width: 768px) {
+      /* Add your styles for smaller screens here */
+    }
+      body {
+        background-image: url('/src/images/water-3354063_1280.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100vh;
+      }
+    
