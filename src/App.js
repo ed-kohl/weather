@@ -1,9 +1,9 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
 import CurrentTime from "./CurrentTime";
 
-/* eslint-disable no-unused-vars */
 /**
  * WeatherSearch component that displays weather information for a given city.
  * @returns {JSX.Element} The JSX element representing the WeatherSearch component.
