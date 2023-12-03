@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
 import CurrentTime from "./CurrentTime";
+import WeatherApp from "./WeatherApp";
 
 /**
  * WeatherSearch component that displays weather information for a given city.
@@ -95,6 +96,11 @@ export default function WeatherSearch() {
       </div>
     );
   } else {
-    return form;
+    return (
+      <div>
+        {form}
+        <WeatherApp />
+      </div>
+    );
   }
 }
