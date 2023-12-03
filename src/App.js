@@ -3,7 +3,6 @@ import axios from "axios";
 import "./App.css";
 import CurrentTime from "./CurrentTime";
 import WeatherApp from "./WeatherApp";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from "recharts";
 
 /**
  * WeatherSearch component that displays weather information for a given city.
