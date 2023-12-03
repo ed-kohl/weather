@@ -52,14 +52,7 @@ function WeatherApp() {
   if (unit === "fahrenheit") {
     temperature = Math.round((temperature * 9) / 5 + 32);
   }
-  const data = [
-    {
-      name: "Weather Data",
-      Temperature: temperature,
-      Humidity: weather.main.humidity,
-      Wind: weather.wind.speed,
-    },
-  ];
+
   return (
     <div className="SearchInProgress">
       <div>
