@@ -3,7 +3,7 @@ body {
     text-align: center;
     display: block;
     margin: 0 auto;
-    background-color:white;
+    background-color:lavenderblush;
   }
 
   h2{
@@ -23,7 +23,8 @@ body {
     border:1px solid black;
     border-radius:20px;
     max-width: 768px;
-    background-color:sandybrown
+    background-color:white;;
+    min-height:200px;
   }
 
 button {
