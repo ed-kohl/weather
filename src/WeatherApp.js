@@ -107,7 +107,7 @@ function WeatherApp() {
             const weekday = weekdays[forecastDate.getDay()];
             return (
               <div className="Forecast-day" key={index}>
-                <p>{weekday}</p>
+                <h3>{weekday}</h3>
                 <p>Temperature: --°{unit === "celsius" ? "C" : "F"}</p>
                 <p>Humidity: --%</p>
                 <p>Wind: --km/h</p>
