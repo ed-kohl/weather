@@ -14,6 +14,15 @@ function WeatherApp() {
   const [unit, setUnit] = useState("celsius");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const weekdays = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
 
   const toggleUnit = () => {
     setUnit(unit === "celsius" ? "fahrenheit" : "celsius");
@@ -69,33 +78,48 @@ function WeatherApp() {
   }
 
   return (
-    <div className={`SearchInProgress`}>
-      <div>
-        <div>
-          <span>
-            <h2>{weather.name}:</h2>
-          </span>
-
-          <ul>
-            <li onClick={toggleUnit}>
-              {temperature}°{unit === "celsius" ? "C" : "F"}
-            </li>
-            <li>
-              <img
-                src={weather.weather[0].icon}
-                alt={weather.weather[0].description}
-              ></img>
-            </li>
-            <li>Humidity: {weather.main.humidity}%</li>
-            <li>Wind: {weather.wind.speed} m/s</li>
-            <li>
-              Your current time:<br></br> {new Date().toLocaleTimeString()}
-            </li>
-          </ul>
-        </div>
+    <div className="App">
+      <div className="CurrentWeather">
+        <h2>{weather.name}:</h2>
+        <ul>
+          <li onClick={toggleUnit}>
+            {temperature}°{unit === "celsius" ? "C" : "F"}
+          </li>
+          <li>
+            <img
+              src={weather.weather[0].icon}
+              alt={weather.weather[0].description}
+            ></img>
+          </li>
+          <li>Humidity: {weather.main.humidity}%</li>
+          <li>Wind: {weather.wind.speed} m/s</li>
+          <li>
+            Your current time:<br></br> {new Date().toLocaleTimeString()}
+          </li>
+        </ul>
+      </div>
+      <div className="Forecast">
+        {Array(5)
+          .fill()
+          .map((_, index) => {
+            const forecastDate = new Date();
+            forecastDate.setDate(new Date().getDate() + index + 1);
+            const weekday = weekdays[forecastDate.getDay()];
+            return (
+              <div className="Forecast-day" key={index}>
+                <p>{weekday}</p>
+                <p>Temperature: --°{unit === "celsius" ? "C" : "F"}</p>
+                <p>Humidity: --%</p>
+                <p>Wind: --km/h</p>
+                <img
+                  src="http://openweathermap.org/img/w/01d.png"
+                  alt="Clear sky"
+                />
+              </div>
+            );
+          })}
       </div>
     </div>
   );
 }
-
 export default WeatherApp;

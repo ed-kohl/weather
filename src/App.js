@@ -22,9 +22,20 @@ export default function WeatherSearch() {
   /*eslint-disable no-unused-vars*/
   const [unit, setUnit] = useState("celsius");
   /*eslint-disable no-unused-vars*/
+  const weekdays = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
   const toggleUnit = () => {
     setUnit(unit === "celsius" ? "fahrenheit" : "celsius");
   };
+
   let temperature = Math.round(weather.temperature);
   if (unit === "fahrenheit") {
     temperature = Math.round((temperature * 9) / 5 + 32);
@@ -105,6 +116,28 @@ export default function WeatherSearch() {
               <img src={weather.icon} alt={weather.description} />
             </li>
           </ul>
+        </div>
+
+        <div className="Forecast">
+          {Array(5)
+            .fill()
+            .map((_, index) => {
+              const forecastDate = new Date();
+              forecastDate.setDate(new Date().getDate() + index + 1); // Add 1 to index
+              const weekday = weekdays[forecastDate.getDay()];
+              return (
+                <div className="Forecast-day" key={index}>
+                  <p>{weekday}</p>
+                  <p>Temperature: --°{unit === "celsius" ? "C" : "F"}</p>
+                  <p>Humidity: --%</p>
+                  <p>Wind: --km/h</p>
+                  <img
+                    src="http://openweathermap.org/img/w/01d.png"
+                    alt="Clear sky"
+                  />
+                </div>
+              );
+            })}
         </div>
       </div>
     );

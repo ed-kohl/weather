@@ -4,6 +4,7 @@
   display: flex;
   margin: 0 auto;
   flex-direction: column;
+  align-items:center;
 
 }
 
@@ -63,6 +64,13 @@ li {
   
 }
 
+.Results,
+.Forecast {
+  width: 100%;
+  max-width: 600px;
+  margin: 20px 0;
+}
+
 .Results{
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
@@ -75,8 +83,19 @@ li {
   margin-top:20px;
 }
 
-@media screen and (max-width: 768px) {
+.Forecast-day {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+@media screen and (max-width: 600px) {
   /* Add your styles for smaller screens here */
+  .Forecast-day {
+      flex-direction: column;
+      align-items: center;
+    }
 }
 
 body {
