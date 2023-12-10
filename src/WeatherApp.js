@@ -107,7 +107,7 @@ export default function WeatherApp() {
       }
     );
   }, []);
-  /*
+
   <div className="Results">
     <ul>
       {forecastDays.map((day, index) => (
@@ -125,7 +125,7 @@ export default function WeatherApp() {
       ))}
     </ul>
   </div>;
-*/
+
   let temperature;
   if (weather) {
     let temperatureCelsius = Math.round(weather.main.temp);
