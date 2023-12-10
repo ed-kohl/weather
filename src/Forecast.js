@@ -5,7 +5,9 @@ import "./Forecast.css";
 export default function Forecast({ city, unit }) {
   const [forecast, setForecast] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  /*eslint-disable no-unused-vars*/
   const [error, setError] = useState(null);
+  /*eslint-disable no-unused-vars*/
   const [loaded, setLoaded] = useState(false);
   const weekdays = [
     "Sunday",
