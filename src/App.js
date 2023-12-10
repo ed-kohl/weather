@@ -3,6 +3,7 @@ import axios from "axios";
 import "./App.css";
 import CurrentTime from "./CurrentTime";
 import WeatherApp from "./WeatherApp";
+import Forecast from "./Forecast";
 
 /**
  * WeatherSearch component that displays weather information for a given city.
@@ -117,28 +118,7 @@ export default function WeatherSearch() {
             </li>
           </ul>
         </div>
-
-        <div className="Forecast">
-          {Array(5)
-            .fill()
-            .map((_, index) => {
-              const forecastDate = new Date();
-              forecastDate.setDate(new Date().getDate() + index + 1); // Add 1 to index
-              const weekday = weekdays[forecastDate.getDay()];
-              return (
-                <div className="Forecast-day" key={index}>
-                  <p>{weekday}</p>
-                  <p>Temperature: --°{unit === "celsius" ? "C" : "F"}</p>
-                  <p>Humidity: --%</p>
-                  <p>Wind: --km/h</p>
-                  <img
-                    src="http://openweathermap.org/img/w/01d.png"
-                    alt="Clear sky"
-                  />
-                </div>
-              );
-            })}
-        </div>
+        <Forecast city={city} unit={unit} />
       </div>
     );
   } else {

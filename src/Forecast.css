@@ -1,0 +1,33 @@
+.ContainForecast{
+    display:flex;
+    flex-direction: column;
+    column-gap:15px;
+    justify-content:center;
+    align-items:left;
+    margin-top:0 auto;
+    
+ 
+
+}
+.Forecast{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: seagreen;
+    text-align: center;
+    display:block;
+    justify-content:center;
+    align-items:center; 
+    margin:0 auto;
+
+    max-width:100%;
+}
+
+.Forecast p{
+    font-size:16px;
+    padding:2px;
+    max-width:20%;
+    text-align:left;
+    margin:auto;
+
+    }

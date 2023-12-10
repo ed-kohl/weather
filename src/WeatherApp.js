@@ -9,8 +9,9 @@ import axios from "axios";
  * WeatherApp component displays weather information based on user's location.
  * @returns {JSX.Element} The WeatherApp component.
  */
-function WeatherApp() {
+export default function WeatherApp() {
   const [weather, setWeather] = useState(null);
+  const [forecast, setForecast] = useState(null);
   const [unit, setUnit] = useState("celsius");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -27,6 +28,56 @@ function WeatherApp() {
   const toggleUnit = () => {
     setUnit(unit === "celsius" ? "fahrenheit" : "celsius");
   };
+
+  function fetchWeather(lat, lon) {
+    const apiKey = process.env.REACT_APP_API_KEY;
+    axios
+      .get(
+        `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
+      )
+      .then((response) => {
+        setWeather(response.data);
+        console.log(response.data.main);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  const forecastDays = forecast
+    ? forecast.list.reduce((days, item, index) => {
+        const dayIndex = Math.floor(index / 8);
+        if (!days[dayIndex]) {
+          days[dayIndex] = [item];
+        } else {
+          days[dayIndex].push(item);
+        }
+        return days;
+      }, [])
+    : [];
+
+  function fetchForecast(lat, lon) {
+    const apiKey = process.env.REACT_APP_API_KEY;
+    axios
+      .get(
+        `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
+      )
+      .then((response) => {
+        setForecast(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords;
+      fetchWeather(latitude, longitude);
+      fetchForecast(latitude, longitude); // Call fetchForecast here
+    });
+  }, []);
 
   useEffect(() => {
     setIsLoading(true);
@@ -56,7 +107,25 @@ function WeatherApp() {
       }
     );
   }, []);
-
+  /*
+  <div className="Results">
+    <ul>
+      {forecastDays.map((day, index) => (
+        <li key={index} onClick={toggleUnit}>
+          <p>
+            Temperature: {day.temperature}°{unit === "celsius" ? "C" : "F"}
+          </p>
+          <p>Humidity: {day.humidity}%</p>
+          <p>Wind: {day.wind}km/h</p>
+          <img
+            src={`http://openweathermap.org/img/w/${day.icon}.png`}
+            alt="Weather icon"
+          />
+        </li>
+      ))}
+    </ul>
+  </div>;
+*/
   let temperature;
   if (weather) {
     let temperatureCelsius = Math.round(weather.main.temp);
@@ -98,28 +167,23 @@ function WeatherApp() {
           </li>
         </ul>
       </div>
-      <div className="Forecast">
-        {Array(5)
-          .fill()
-          .map((_, index) => {
-            const forecastDate = new Date();
-            forecastDate.setDate(new Date().getDate() + index + 1);
-            const weekday = weekdays[forecastDate.getDay()];
-            return (
-              <div className="Forecast-day" key={index}>
-                <h3>{weekday}</h3>
-                <p>Temperature: --°{unit === "celsius" ? "C" : "F"}</p>
-                <p>Humidity: --%</p>
-                <p>Wind: --km/h</p>
-                <img
-                  src="http://openweathermap.org/img/w/01d.png"
-                  alt="Clear sky"
-                />
-              </div>
-            );
-          })}
+      <div className="Results">
+        <ul>
+          {forecastDays.map((day, index) => (
+            <li key={index} onClick={toggleUnit}>
+              <p>
+                Temperature: {day.temperature}°{unit === "celsius" ? "C" : "F"}
+              </p>
+              <p>Humidity: {day.humidity}%</p>
+              <p>Wind: {day.wind}km/h</p>
+              <img
+                src={`http://openweathermap.org/img/w/${day.icon}.png`}
+                alt="Weather icon"
+              />
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
 }
-export default WeatherApp;
