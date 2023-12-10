@@ -15,6 +15,7 @@ export default function WeatherApp() {
   const [unit, setUnit] = useState("celsius");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  /*eslint-disable no-unused-vars*/
   const weekdays = [
     "Sunday",
     "Monday",
