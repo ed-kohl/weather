@@ -58,21 +58,34 @@ export default function Forecast({ city, unit }) {
           forecastDate.setDate(new Date().getDate() + index + 1);
           const weekday = weekdays[forecastDate.getDay()];
           return (
-            <section className="ContainForecast">
+            <div className="ContainForecast">
               <div className="Forecast-day" key={index}>
-                <h3>{weekday}</h3>
-                <p>
-                  Temperature:
-                  <br /> {day.temperature}
-                  {unit === "celsius" ? "°C" : "F"}
-                </p>
-                <p>
-                  Wind: <br /> {day.wind} km/h
-                </p>
-                <p>{day.description}</p>
-                <img src={day.URL} alt="Weather icon"></img>
+                <div className="Forecast-item">
+                  <h3>{weekday}</h3>
+                </div>
+                <div className="Forecast-item">
+                  <p>
+                    Temperature:
+                    <br />{" "}
+                    <b>
+                      {day.temperature}
+                      {unit === "celsius" ? "°C" : "F"}{" "}
+                    </b>
+                  </p>
+                </div>
+                <div className="Forecast-item">
+                  <p>
+                    Wind: <br /> {day.wind} km/h
+                  </p>
+                </div>
+                <div className="Forecast-item">
+                  <p>{day.description}</p>
+                </div>
+                <div className="Forecast-item">
+                  <img src={day.URL} alt="Weather icon"></img>
+                </div>
               </div>
-            </section>
+            </div>
           );
         })}
     </div>
